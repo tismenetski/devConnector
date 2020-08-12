@@ -1,6 +1,0 @@
-{
-    "mongoURI" : "mongodb+srv://tantutu:Tantutu2020@cluster0.8vpnq.mongodb.net/MERN?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken",
-    "githubClientId": "f35887ea2199363a348c",
-    "githubSecret" : "2e355fc3cd139f26de3a70044e873ca7081c3be6"
-}
