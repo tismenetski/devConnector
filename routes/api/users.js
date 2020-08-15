@@ -20,6 +20,7 @@ router.post('/',[
     console.log(req.body);
     const errors = validationResult(req); //we run the function validationResult that populates errors variable with possible errors
     if(!errors.isEmpty()){ //if errors is not empty return 400 code with the errors array
+        console.log("INSIDE USERS POST ROUTER NODEJS");
         return res.status(400).json({errors: errors.array()}); // 400 - Bad Request -send back array of errors
     }
 
