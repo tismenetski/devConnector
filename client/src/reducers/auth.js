@@ -5,7 +5,9 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    ACCOUNT_DELETED
+
 } from "../actions/types";
 
 const initialState = {
@@ -19,19 +21,7 @@ export default function (state = initialState , action) {
 
     const {type , payload} = action;
     switch (type) {
-
-        case REGISTER_SUCCESS:
-            localStorage.setItem('token',payload.token);
-            return {...state,
-                ...payload,
-                isAuthenticated: true,
-                loading: false}
-        case REGISTER_FAIL:
-            localStorage.removeItem('token');
-            return{...state,
-                token : null,
-                isAuthenticated: false,
-                loading: false}
+ 
         case USER_LOADED : 
                 return{
                     ...state,
@@ -39,29 +29,23 @@ export default function (state = initialState , action) {
                     loading : false,
                     user: payload
                 }
-
-        case AUTH_ERROR : 
-        localStorage.removeItem('token');
-        return{...state,
-            token : null,
-            isAuthenticated: false,
-            loading: false}
-
+        
+        case REGISTER_SUCCESS:
         case LOGIN_SUCCESS: //Does exactly what REGISTER_SUCCESS does -> for now keeping them seperate
             localStorage.setItem('token',payload.token);
             return {...state,
                 ...payload,
                 isAuthenticated: true,
                 loading: false}
-        case LOGIN_FAIL: //Does exactly what REGISTER_FAIL does -> for now keeping them seperate
+
+
+        case LOGIN_FAIL:
+        case LOGOUT:
+        case AUTH_ERROR :
+        case REGISTER_FAIL:
+        case ACCOUNT_DELETED:
             localStorage.removeItem('token');
-            return{...state,
-                token : null,
-                isAuthenticated: false,
-                loading: false}
-        case LOGOUT: //Does exactly what REGISTER_FAIL does -> for now keeping them seperate
-            localStorage.removeItem('token');
-            return{...state,
+                return{...state,
                 token : null,
                 isAuthenticated: false,
                 loading: false}
